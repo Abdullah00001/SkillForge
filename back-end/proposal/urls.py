@@ -19,12 +19,12 @@ urlpatterns = [
         name="proposals_list",
     ),
     path(
-        "client/proposal-details/<int:proposal_id>/",
+        "client/proposal-details/<int:id>/",
         ProposalDetailView.as_view(),
         name="detail-proposal",
     ),
     path(
-        "client/reject-proposal/<int:proposal_id>/",
+        "client/reject-proposal/<int:id>/",
         ProposalRejectView.as_view(),
         name="proposal-reject",
     ),

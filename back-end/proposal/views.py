@@ -48,7 +48,7 @@ class ProposalListView(generics.ListAPIView):
 class ProposalDetailView(generics.RetrieveAPIView):
     queryset = Proposal.objects.all()
     serializer_class = ProposalSerializer
-    lookup_url_kwarg = "proposal_id"
+    lookup_url_kwarg = "id"
 
     def retrieve(self, request, *args, **kwargs):
         proposal_id = kwargs.get(self.lookup_url_kwarg)
@@ -64,7 +64,7 @@ class ProposalDetailView(generics.RetrieveAPIView):
 class ProposalRejectView(generics.UpdateAPIView):
     queryset = Proposal.objects.all()
     serializer_class = ProposalSerializer
-    lookup_url_kwarg = "proposal_id"
+    lookup_url_kwarg = "id"
 
     def patch(self, request, *args, **kwargs):
         try:

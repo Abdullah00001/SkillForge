@@ -43,6 +43,7 @@ class ClientProfile(models.Model):
     languages = models.CharField(max_length=40, choices=LANGUAGES)
     user_balance = models.IntegerField(default=0)
     user_description = models.TextField()
+    account_type = models.CharField(max_length=70, choices=ACCOUNT_TYPE,null=True)
 
     def __str__(self) -> str:
         return f"{self.user.username} {self.account_type}"
