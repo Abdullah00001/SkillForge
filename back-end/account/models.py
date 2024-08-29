@@ -13,7 +13,7 @@ class FreelancerProfile(models.Model):
     )
     profile_image = models.URLField()
     profile_title = models.CharField(max_length=350)
-    profole_category = models.CharField(max_length=230)
+    profile_category = models.CharField(max_length=230)
     contact_number = models.CharField(max_length=15)
     gender_type = models.CharField(max_length=15, choices=GENDER_TYPE)
     user_role = models.CharField(max_length=120)

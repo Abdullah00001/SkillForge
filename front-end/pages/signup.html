@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+
+<body class="bg-[#131842] h-screen flex items-center justify-center">
+    <div class="flex flex-col items-center mt-10">
+        <div class="flex w-full max-w-4xl items-center">
+            <div class="w-1/2 flex justify-center" data-aos="fade-right">
+                <img class="w-3/4" src="../images/Mobile-login.jpg" alt="Mobile login">
+            </div>
+            <div class="w-1/2 px-8" data-aos="fade-left">
+                <h1 class="text-5xl font-bold text-[#FF4191] mb-6 text-center">Create Account</h1>
+                <div id="form-container">
+                    <!-- Step 1: User Type Selection -->
+                    <div id="step1">
+                        <h2 class="text-2xl font-bold mb-4 text-center">Select User Type</h2>
+                        <div class="flex justify-around">
+                            <button id="freelancerBtn"
+                                class="bg-blue-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Freelancer</button>
+                            <button id="clientBtn"
+                                class="bg-green-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Client</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Category Selection (for Freelancers) -->
+                    <div id="step2" class="hidden">
+                        <h2 class="text-2xl font-bold mb-4 text-center">Select Category</h2>
+                        <div id="categoryButtons" class="flex flex-wrap justify-center space-x-2"></div>
+                        <button id="nextBtn"
+                            class="mt-4 bg-indigo-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Next</button>
+                    </div>
+
+                    <!-- Step 3: Main Registration Form -->
+                    <div id="step3" class="hidden">
+                        <h2 class="text-2xl font-bold mb-4 text-center">Registration Form</h2>
+                        <form id="signupForm" class="space-y-6">
+                            <div>
+                                <label for="first_name" class="block text-lg font-medium mb-1 text-gray-700">First
+                                    Name</label>
+                                <input type="text" id="first_name" name="first_name"
+                                    class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="last_name" class="block text-lg font-medium mb-1 text-gray-700">Last
+                                    Name</label>
+                                <input type="text" id="last_name" name="last_name"
+                                    class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="username"
+                                    class="block text-lg font-medium mb-1 text-gray-700">Username</label>
+                                <input type="text" id="username" name="username"
+                                    class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-lg font-medium mb-1 text-gray-700">Email</label>
+                                <input type="email" id="email" name="email"
+                                    class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="password"
+                                    class="block text-lg font-medium mb-1 text-gray-700">Password</label>
+                                <input type="password" id="password" name="password"
+                                    class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="confirm_password"
+                                    class="block text-lg font-medium mb-1 text-gray-700">Confirm Password</label>
+                                <input type="password" id="confirm_password" name="confirm_password"
+                                    class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                    required>
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-indigo-600 text-white font-bold py-3 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign
+                                Up</button>
+                            <p class="mt-4 text-center text-gray-600">Already have an account? <a href="login.html"
+                                    class="text-indigo-400 hover:underline">Log In</a></p>
+                        </form>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="successMessage"
+                        class="hidden mt-6 p-4 bg-green-100 text-green-700 border border-green-200 rounded text-center">
+                        Registration successful. Please check your email to activate your account.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/registration.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

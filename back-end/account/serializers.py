@@ -4,15 +4,17 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework_simplejwt.tokens import RefreshToken
 from account.models import FreelancerProfile, ClientProfile
 import requests
+from account.constants import ACCOUNT_TYPE,FREELANCER,CLIENT
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
     confirm_password = serializers.CharField(
         style={"input_type": "password"}, required=True
     )
-    first_name = serializers.CharField(style={"input_type": "text"}, required=True)
-    last_name = serializers.CharField(style={"input_type": "text"}, required=True)
-    email = serializers.CharField(style={"input_type": "email"}, required=True)
+    user_type = serializers.ChoiceField(
+        choices=ACCOUNT_TYPE, required=True
+    )
+    profile_category = serializers.CharField(required=False)
 
     class Meta:
         model = User
@@ -23,16 +25,21 @@ class RegistrationSerializer(serializers.ModelSerializer):
             "email",
             "password",
             "confirm_password",
+            "user_type",
+            "profile_category",
         ]
 
     def validate(self, data):
         if data["password"] != data["confirm_password"]:
-            raise serializers.ValidationError("Password Do Not Match")
+            raise serializers.ValidationError("Passwords do not match")
         validate_password(data["password"])
         return data
 
     def create(self, validated_data):
         validated_data.pop("confirm_password")
+        user_type = validated_data.pop("user_type")
+        profile_category = validated_data.pop("profile_category")
+
         user = User.objects.create(
             first_name=validated_data["first_name"],
             last_name=validated_data["last_name"],
@@ -42,6 +49,19 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(validated_data["password"])
         user.is_active = False
         user.save()
+
+        if user_type == FREELANCER:
+            FreelancerProfile.objects.create(
+                user=user,
+                profile_category=profile_category,
+                account_type=user_type,
+            )
+        elif user_type == CLIENT:
+            ClientProfile.objects.create(
+                user=user,
+                account_type=user_type,
+            )
+
         return user
 
 
@@ -199,4 +219,10 @@ class FreelancerGetProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = FreelancerProfile
+        fields = "__all__"
+class ClientGetProfileSerializer(serializers.ModelSerializer):
+    user = UserGetSerializer()
+
+    class Meta:
+        model = ClientProfile
         fields = "__all__"

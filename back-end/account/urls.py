@@ -8,12 +8,13 @@ from account.views import (
     PasswordChangeView,
     LogoutView,
     FreelancerGetProfileView,
+    ClientGetProfileView,
 )
 
 urlpatterns = [
     path("register/", UserRegistrationView.as_view(), name="register"),
     path(
-        "activate/<str:uidb64>/<str:token>/",
+        "activate/<str:uid64>/<str:token>/",
         ActivateAccountView.as_view(),
         name="activate",
     ),
@@ -36,5 +37,10 @@ urlpatterns = [
         "get-freelancer-profiles/",
         FreelancerGetProfileView.as_view(),
         name="get-freelancer-profiles",
+    ),
+    path(
+        "get-client-profiles/",
+        ClientGetProfileView.as_view(),
+        name="get-client-profiles",
     ),
 ]
